@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 
 import pandas as pd
@@ -33,7 +33,7 @@ plt.ylabel('Count')
 plt.show()
 
 
-# In[5]:
+# In[2]:
 
 
 # Visualization for categorical data
@@ -53,7 +53,7 @@ plt.ylabel("Yield")
 plt.show()
 
 
-# In[6]:
+# In[3]:
 
 
 # Bar chart
@@ -106,7 +106,13 @@ plt.ylabel('Yield')
 plt.show()
 
 
-# In[9]:
+# In[11]:
+
+
+sns.lineplot(data,x='Location',y='Quality')
+
+
+# In[4]:
 
 
 # 1. Identifying and handling missing data
@@ -147,7 +153,7 @@ print(summary_data.head())
 
 
 
-# In[13]:
+# In[5]:
 
 
 import plotly.express as px
@@ -174,44 +180,101 @@ fig.update_layout(title='Interactive Scatter Plot of Yield vs Quality',
 fig.show()
 
 
-# In[15]:
+# In[6]:
 
 
 fig = px.histogram(data, x='Yield', nbins=20, title='Yield Distribution')
 fig.show()
 
 
-# In[16]:
+# In[7]:
 
 
 fig = px.box(data, x='Location', y='Yield', points="all", title='Yield Distribution by Location')
 fig.show()
 
 
-# In[17]:
+# In[8]:
 
 
 fig = px.bar(data, x='Location', y='Yield', title='Mean Yield by Location', barmode='group')
 fig.show()
 
 
-# In[18]:
+# In[9]:
 
 
 fig = px.scatter_3d(data, x='Yield', y='Quality', z='Planting Week', color='Location')
 fig.show()
 
 
-# In[ ]:
+# In[13]:
+
+
+d=pd.read_csv("weekly_fuel_prices_all_data_from_2005_to_20210823.csv")
+
+
+# In[14]:
+
+
+d.head()
+
+
+# In[15]:
+
+
+sns.lineplot(d,x='SURVEY_DATE',y='PRICE')
+
+
+# In[20]:
+
+
+import plotly.graph_objs as go
+
+fig = go.Figure()
+
+# Add traces
+fig.add_trace(go.Scatter(x=d['SURVEY_DATE'], y=d['PRICE'], mode='lines', name='Price'))
+
+# Update layout
+fig.update_layout(
+    title="Price Time Series",
+    xaxis=dict(title="Survey Date"),
+    yaxis=dict(title="Price")
+)
+
+# Show plot
+fig.show()
+
+
+# In[23]:
 
 
 
+# Create line plot with range slider
+fig = px.line(d, x='SURVEY_DATE', y='PRICE', title='Price Time Series', labels={'SURVEY_DATE': 'Survey Date', 'PRICE': 'Price'})
+
+# Add range slider
+fig.update_xaxes(rangeslider_visible=True)
+
+# Show plot
+fig.show()
 
 
-# In[ ]:
+# In[27]:
 
 
+from autoviz.AutoViz_Class import AutoViz_Class
 
+AV = AutoViz_Class()
+
+df = AV.AutoViz(data)
+
+
+# In[26]:
+
+
+pip install autoviz
 
 
 # In[ ]:
